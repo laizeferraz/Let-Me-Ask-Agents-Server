@@ -37,3 +37,8 @@ export const createQuestionRoute: FastifyPluginCallbackZod = (app) => {
     }
   );
 };
+// This route allows users to create a new question in a specific room.
+// It requires the room ID as a URL parameter and the question text in the request body.
+// The question must be a non-empty string. If the question is successfully created,
+// it returns the ID of the newly created question with a 201 status code.
+// If the creation fails, it throws an error indicating the failure to create the question.
