@@ -15,6 +15,13 @@
       "when": 1752136207682,
       "tag": "0001_big_bloodstorm",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752391689028,
+      "tag": "0002_flaky_starhawk",
+      "breakpoints": true
     }
   ]
 }
