@@ -3,7 +3,7 @@ import type { FastifyPluginCallbackZod } from 'fastify-type-provider-zod';
 import { z } from 'zod/v4';
 import { db } from '../../db/connection.ts';
 import { schema } from '../../db/schema/index.ts';
-import { generateEmbeddings } from '../../services/gemini.ts';
+import { generateAnswer, generateEmbeddings } from '../../services/gemini.ts';
 
 export const createQuestionRoute: FastifyPluginCallbackZod = (app) => {
   app.post(
@@ -44,27 +44,31 @@ export const createQuestionRoute: FastifyPluginCallbackZod = (app) => {
         )
         .limit(3);
 
-      return chunks;
+      let answer: string | null = null;
 
-      // const result = await db
-      //   .insert(schema.questions)
-      //   .values({
-      //     roomId,
-      //     question,
-      //   })
-      //   .returning();
+      if (chunks.length > 0) {
+        const trancriptions = chunks.map((chunk) => chunk.transcription);
 
-      // const insertedQuestion = result[0];
+        answer = await generateAnswer(question, trancriptions);
+      }
 
-      // if (!insertedQuestion) {
-      //   throw new Error('Failed to create question.');
-      // }
-      // return reply.status(201).send({ questionId: insertedQuestion.id });
+      const result = await db
+        .insert(schema.questions)
+        .values({
+          roomId,
+          question,
+          answer,
+        })
+        .returning();
+
+      const insertedQuestion = result[0];
+
+      if (!insertedQuestion) {
+        throw new Error('Failed to create question.');
+      }
+      return reply
+        .status(201)
+        .send({ questionId: insertedQuestion.id, answer });
     }
   );
 };
-// This route allows users to create a new question in a specific room.
-// It requires the room ID as a URL parameter and the question text in the request body.
-// The question must be a non-empty string. If the question is successfully created,
-// it returns the ID of the newly created question with a 201 status code.
-// If the creation fails, it throws an error indicating the failure to create the question.

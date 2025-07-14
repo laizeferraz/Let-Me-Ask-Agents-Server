@@ -20,7 +20,3 @@ export const getRoomsRoute: FastifyPluginCallbackZod = (app) => {
     return result;
   });
 };
-// This route retrieves all rooms from the database, including the count of questions in each room.
-// It uses a left join to include rooms that may not have any questions yet, ensuring that
-// all rooms are returned even if they have zero questions.
-// The results are grouped by room ID and name, and ordered by the creation date of the rooms.

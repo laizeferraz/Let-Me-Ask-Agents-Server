@@ -12,7 +12,7 @@ export async function transcribeAudio(audioAsbase64: string, mimeType: string) {
     model,
     contents: [
       {
-        text: 'Transcribe audio to english or to the language spoken. Return a precise and natural trancription. Keep correct pontuation and divide the text in paragraphs.',
+        text: 'Transcribe audio to english. Return a precise and natural trancription. Keep correct pontuation and divide the text in paragraphs.',
       },
       {
         inlineData: {
@@ -53,7 +53,7 @@ export async function generateAnswer(
   const context = trancriptions.join('\n\n');
 
   const prompt = `
-    Based on the text shared bellow as context, answer the question clearly and precisily in the language used.
+    Based on the text shared bellow as context, answer the question clearly and precisily in English.
 
     CONTEXT:
     ${context}
@@ -64,7 +64,7 @@ export async function generateAnswer(
     INSTRUCTIONS:
     - Use only the information contained inside the context sent.
     - If the response is not in the context, just answer that there is not enough information to give a correct and precise answer.
-    - Be objective
+    - Be objective.
     - Keep an educative and professional tone.
     - Refer, if appropriated, to relevant parts of the context.
     - If a context reference is needed, use the sentence "content from the class".
