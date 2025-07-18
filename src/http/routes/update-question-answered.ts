@@ -4,7 +4,7 @@ import { z } from 'zod/v4';
 import { db } from '../../db/connection.ts';
 import { schema } from '../../db/schema/index.ts';
 
-export const highlightQuestionRoute: FastifyPluginCallbackZod = (app) => {
+export const updateQuestionAnsweredRoute: FastifyPluginCallbackZod = (app) => {
   app.patch(
     '/rooms/:roomId/questions/:questionId/highlight',
     {

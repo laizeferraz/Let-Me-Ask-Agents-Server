@@ -52,8 +52,8 @@ Content-Type: application/json
 
 ###
 
-# Highlight question (mark as answered)
-# @name highlightQuestion
+# Mark question as answered
+# @name updateQuestionAnswered
 PATCH {{baseUrl}}/rooms/{{roomId}}/questions/{{questionId}}/highlight
 Content-Type: application/json
 
