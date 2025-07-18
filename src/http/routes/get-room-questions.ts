@@ -22,6 +22,7 @@ export const getRoomQuestionsRoute: FastifyPluginCallbackZod = (app) => {
           id: schema.questions.id,
           question: schema.questions.question,
           answer: schema.questions.answer,
+          isQuestionAnswered: schema.questions.isQuestionAnswered,
           createdAt: schema.questions.createdAt,
         })
         .from(schema.questions)

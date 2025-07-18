@@ -45,3 +45,18 @@ Content-Type: application/json
 {
   "question": "I would like to know more about the objectives of this room."
 }
+
+###
+
+@questionId = {{createQuestion.response.body.$.questionId}}
+
+###
+
+# Highlight question (mark as answered)
+# @name highlightQuestion
+PATCH {{baseUrl}}/rooms/{{roomId}}/questions/{{questionId}}/highlight
+Content-Type: application/json
+
+{
+  "isQuestionAnswered": true
+}

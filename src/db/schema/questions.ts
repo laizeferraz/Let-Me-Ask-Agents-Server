@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { rooms } from './rooms.ts';
 
 export const questions = pgTable('questions', {
@@ -9,4 +9,5 @@ export const questions = pgTable('questions', {
   question: text().notNull(),
   answer: text(),
   createdAt: timestamp().defaultNow().notNull(),
+  isQuestionAnswered: boolean().default(false),
 });
