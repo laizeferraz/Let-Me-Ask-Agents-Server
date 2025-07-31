@@ -53,21 +53,29 @@ export async function generateAnswer(
   const context = trancriptions.join('\n\n');
 
   const prompt = `
-    Based on the text shared bellow as context, answer the question clearly and precisily in English.
+    You are analyzing transcribed audio content about different topics. The text below contains multiple fragments from spoken explanations that may include:
+    - Natural speech patterns (pauses, "uh", "um")
+    - Incomplete sentences
+    - Related concepts scattered across fragments
+    - Technical explanations broken into pieces
 
-    CONTEXT:
+    CONTEXT (Transcribed audio fragments):
     ${context}
 
     QUESTION:
     ${question}
 
     INSTRUCTIONS:
-    - Use only the information contained inside the context sent.
-    - If the response is not in the context, just answer that there is not enough information to give a correct and precise answer.
-    - Be objective.
-    - Keep an educative and professional tone.
-    - Refer, if appropriated, to relevant parts of the context.
-    - If a context reference is needed, use the sentence "content from the class".
+    - Analyze ALL fragments to understand the complete picture
+    - Piece together related information from different fragments
+    - Ignore speech fillers and focus on the technical content
+    - If you can construct a meaningful answer from the fragments, provide it
+    - Include practical examples and explanations found across the fragments
+    - Be comprehensive but stick to information found in the context
+    - If truly insufficient information exists across ALL fragments, then mention the limitation
+    - Reference "content from the class" when appropriate
+
+    Provide a clear, educational answer based on the available information.
   `.trim();
   const response = await gemini.models.generateContent({
     model,
