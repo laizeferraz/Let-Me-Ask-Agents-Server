@@ -39,7 +39,7 @@ app.register(createQuestionRoute);
 app.register(updateQuestionAnsweredRoute);
 app.register(uploadAudioRoute);
 
-if (process.env.NODE_ENV === 'production') {
+if (env.NODE_ENV === 'production') {
   // For Vercel deployment
   app.listen({
     port: 0, // Vercel assigns the port

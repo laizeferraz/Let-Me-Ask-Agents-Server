@@ -3,7 +3,7 @@ import postgres from 'postgres';
 import { env } from '../env.ts';
 import { schema } from './schema/index.ts';
 
-export const sql = postgres(env.DB_URL);
+export const sql = postgres(env.DATABASE_URL);
 
 // To test the connection, you can run a simple query like this:
 // Uncomment the following lines to test the connection

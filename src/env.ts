@@ -19,16 +19,16 @@ const envSchema = z
     }
   );
 
-export const env = envSchema.parse(process.env);
+const parsedEnv = envSchema.parse(process.env);
 
 // Export the final env object with database URL selection logic
-export const envProd = {
-  PORT: env.PORT,
-  NODE_ENV: env.NODE_ENV,
+export const env = {
+  PORT: parsedEnv.PORT,
+  NODE_ENV: parsedEnv.NODE_ENV,
   // Use DATABASE_URL for production, DB_URL for local development
   DATABASE_URL:
-    env.NODE_ENV === 'production'
-      ? env.DATABASE_URL!
-      : env.DB_URL || env.DATABASE_URL!,
-  GEMINI_API_KEY: env.GEMINI_API_KEY,
+    parsedEnv.NODE_ENV === 'production'
+      ? parsedEnv.DATABASE_URL!
+      : parsedEnv.DB_URL || parsedEnv.DATABASE_URL!,
+  GEMINI_API_KEY: parsedEnv.GEMINI_API_KEY,
 };

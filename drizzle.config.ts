@@ -6,8 +6,7 @@ export default defineConfig({
   dialect: 'postgresql',
   out: './src/db/migrations',
   dbCredentials: {
-    // biome-ignore lint/style/noNonNullAssertion: the expression is needed for clarity
-    url: env.DB_URL!,
+    url: env.DATABASE_URL,
   },
   casing: 'snake_case',
 });
