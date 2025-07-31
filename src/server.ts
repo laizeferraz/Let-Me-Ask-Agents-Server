@@ -19,7 +19,7 @@ import { uploadAudioRoute } from './http/routes/upload-audio.ts';
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
-  origin: 'http://localhost:5173',
+  origin: ['http://localhost:5173', 'https://your-frontend-app.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 });
 
@@ -39,6 +39,17 @@ app.register(createQuestionRoute);
 app.register(updateQuestionAnsweredRoute);
 app.register(uploadAudioRoute);
 
-app.listen({
-  port: env.PORT,
-});
+if (process.env.NODE_ENV === 'production') {
+  // For Vercel deployment
+  app.listen({
+    port: 0, // Vercel assigns the port
+    host: '0.0.0.0',
+  });
+} else {
+  app.listen({
+    port: env.PORT,
+  });
+}
+
+// Export for Vercel
+export default app;
