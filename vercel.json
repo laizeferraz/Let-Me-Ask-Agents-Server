@@ -1,8 +1,14 @@
 {
+  "version": 2,
+  "functions": {
+    "src/server.ts": {
+      "runtime": "@vercel/node@3"
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/api/serverless.js"
+      "destination": "/src/server.ts"
     }
   ]
 }
