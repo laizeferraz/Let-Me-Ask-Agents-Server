@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "vercel-build": "echo 'Vercel handles TypeScript compilation'",
+    "vercel-build": "npm run build",
     "dev": "node --env-file .env --no-warnings --experimental-strip-types --watch src/server.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
