@@ -24,6 +24,7 @@ app.register(fastifyCors, {
     'https://let-me-ask-agents-web.vercel.app/',
   ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  credentials: true,
 });
 
 app.register(fastifyMultipart);
