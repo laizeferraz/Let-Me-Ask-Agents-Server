@@ -2,7 +2,6 @@ import { fastifyCors } from '@fastify/cors';
 import { fastifyMultipart } from '@fastify/multipart';
 // To test the database connection, you can uncomment the import below
 // import { sql } from './db/connection.ts';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { fastify } from 'fastify';
 import {
   serializerCompiler,
@@ -47,9 +46,4 @@ if (env.NODE_ENV !== 'production') {
     port: env.PORT,
     host: '0.0.0.0',
   });
-}
-
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  await app.ready();
-  app.server.emit('request', req, res);
 }
