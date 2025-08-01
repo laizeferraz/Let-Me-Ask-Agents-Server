@@ -1,13 +1,14 @@
 import { fastifyCors } from '@fastify/cors';
 import { fastifyMultipart } from '@fastify/multipart';
+// To test the database connection, you can uncomment the import below
+// import { sql } from './db/connection.ts';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { fastify } from 'fastify';
 import {
   serializerCompiler,
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
-// To test the database connection, you can uncomment the import below
-// import { sql } from './db/connection.ts';
 import { env } from './env.ts';
 import { createQuestionRoute } from './http/routes/create-question.ts';
 import { createRoomRoute } from './http/routes/create-room.ts';
@@ -41,17 +42,14 @@ app.register(createQuestionRoute);
 app.register(updateQuestionAnsweredRoute);
 app.register(uploadAudioRoute);
 
-if (env.NODE_ENV === 'production') {
-  // For Vercel deployment
-  app.listen({
-    port: 0, // Vercel assigns the port
-    host: '0.0.0.0',
-  });
-} else {
+if (env.NODE_ENV !== 'production') {
   app.listen({
     port: env.PORT,
+    host: '0.0.0.0',
   });
 }
 
-// Export for Vercel
-export default app;
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  await app.ready();
+  app.server.emit('request', req, res);
+}
