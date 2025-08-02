@@ -8,13 +8,13 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
-import { env } from './env.ts';
-import { createQuestionRoute } from './http/routes/create-question.ts';
-import { createRoomRoute } from './http/routes/create-room.ts';
-import { getRoomQuestionsRoute } from './http/routes/get-room-questions.ts';
-import { getRoomsRoute } from './http/routes/get-rooms.ts';
-import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered.ts';
-import { uploadAudioRoute } from './http/routes/upload-audio.ts';
+import { env } from './env';
+import { createQuestionRoute } from './http/routes/create-question';
+import { createRoomRoute } from './http/routes/create-room';
+import { getRoomQuestionsRoute } from './http/routes/get-room-questions';
+import { getRoomsRoute } from './http/routes/get-rooms';
+import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered';
+import { uploadAudioRoute } from './http/routes/upload-audio';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -47,3 +47,6 @@ if (env.NODE_ENV !== 'production') {
     host: '0.0.0.0',
   });
 }
+
+// Export the app for Vercel serverless function
+export default app;

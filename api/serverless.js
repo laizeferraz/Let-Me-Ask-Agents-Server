@@ -1,19 +1,4 @@
-// Read the .env file.
-// biome-ignore lint/performance/noNamespaceImport: it's important to import all for now
-import * as dotenv from 'dotenv';
-
-dotenv.config();
-
-// Require the framework
-import Fastify from 'fastify';
-
-// Instantiate Fastify with some config
-const app = Fastify({
-  logger: true,
-});
-
-// Register your application as a normal plugin.
-app.register(import('../src/*'));
+import app from '../src/server.ts';
 
 export default async (req, res) => {
   await app.ready();
