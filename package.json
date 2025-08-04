@@ -12,9 +12,6 @@
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "node --env-file .env --no-warnings --experimental-strip-types src/db/seed.ts"
   },
-  "engines": {
-    "node": ">=20.0.0"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
