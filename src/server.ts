@@ -1,20 +1,20 @@
 import { fastifyCors } from '@fastify/cors';
 import { fastifyMultipart } from '@fastify/multipart';
 // To test the database connection, you can uncomment the import below
-// import { sql } from './db/connection.ts';
+// import { sql } from './db/connection.js';
 import { fastify } from 'fastify';
 import {
   serializerCompiler,
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
-import { env } from './env.ts';
-import { createQuestionRoute } from './http/routes/create-question.ts';
-import { createRoomRoute } from './http/routes/create-room.ts';
-import { getRoomQuestionsRoute } from './http/routes/get-room-questions.ts';
-import { getRoomsRoute } from './http/routes/get-rooms.ts';
-import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered.ts';
-import { uploadAudioRoute } from './http/routes/upload-audio.ts';
+import { env } from './env.js';
+import { createQuestionRoute } from './http/routes/create-question.js';
+import { createRoomRoute } from './http/routes/create-room.js';
+import { getRoomQuestionsRoute } from './http/routes/get-room-questions.js';
+import { getRoomsRoute } from './http/routes/get-rooms.js';
+import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered.js';
+import { uploadAudioRoute } from './http/routes/upload-audio.js';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
