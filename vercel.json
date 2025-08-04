@@ -4,5 +4,8 @@
       "source": "/(.*)",
       "destination": "/dist/api/serverless.js"
     }
-  ]
+  ],
+  "build": {
+    "outputDirectory": "dist"
+  }
 }
