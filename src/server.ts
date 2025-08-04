@@ -8,13 +8,13 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
-import { env } from './env.js';
-import { createQuestionRoute } from './http/routes/create-question.js';
-import { createRoomRoute } from './http/routes/create-room.js';
-import { getRoomQuestionsRoute } from './http/routes/get-room-questions.js';
-import { getRoomsRoute } from './http/routes/get-rooms.js';
-import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered.js';
-import { uploadAudioRoute } from './http/routes/upload-audio.js';
+import { env } from './env';
+import { createQuestionRoute } from './http/routes/create-question';
+import { createRoomRoute } from './http/routes/create-room';
+import { getRoomQuestionsRoute } from './http/routes/get-room-questions';
+import { getRoomsRoute } from './http/routes/get-rooms';
+import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered';
+import { uploadAudioRoute } from './http/routes/upload-audio';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 

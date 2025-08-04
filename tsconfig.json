@@ -2,13 +2,13 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "_version": "22.0.0",
   "compilerOptions": {
-    "module": "NodeNext",
+    "module": "es2022",
     "target": "es2017",
     "noEmit": false,
     "outDir": "./dist/",
     "strict": false,
     "esModuleInterop": true,
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "strictNullChecks": true,
     "skipLibCheck": true,
     "types": ["node"]
