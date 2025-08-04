@@ -2,16 +2,16 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "_version": "22.0.0",
   "compilerOptions": {
-    "module": "es2022",
-    "target": "es2017",
-    "noEmit": false,
+    "module": "preserve",
+    "target": "ES2021",
     "outDir": "./dist/",
+    "rootDir": "./",
     "strict": false,
     "esModuleInterop": true,
-    "moduleResolution": "node",
     "strictNullChecks": true,
-    "skipLibCheck": true,
-    "types": ["node"]
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*", "api/**/*"]
 }

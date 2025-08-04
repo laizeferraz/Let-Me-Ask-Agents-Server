@@ -8,18 +8,29 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
-import { env } from './env';
-import { createQuestionRoute } from './http/routes/create-question';
-import { createRoomRoute } from './http/routes/create-room';
-import { getRoomQuestionsRoute } from './http/routes/get-room-questions';
-import { getRoomsRoute } from './http/routes/get-rooms';
-import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered';
-import { uploadAudioRoute } from './http/routes/upload-audio';
+import { env } from './env.ts';
+import { createQuestionRoute } from './http/routes/create-question.ts';
+import { createRoomRoute } from './http/routes/create-room.ts';
+import { getRoomQuestionsRoute } from './http/routes/get-room-questions.ts';
+import { getRoomsRoute } from './http/routes/get-rooms.ts';
+import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered.ts';
+import { uploadAudioRoute } from './http/routes/upload-audio.ts';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
-  origin: ['http://localhost:5173', 'https://let-me-ask-agents-web.vercel.app'],
+  origin: (origin, cb) => {
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'https://let-me-ask-agents-web.vercel.app',
+    ];
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      cb(null, true); // Allow the request
+    } else {
+      cb(new Error('Not allowed by CORS'), false); // Reject the request
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
