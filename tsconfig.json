@@ -2,16 +2,18 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "_version": "22.0.0",
   "compilerOptions": {
-    "module": "preserve",
+    "module": "nodenext",
     "target": "ES2021",
+    "moduleResolution": "NodeNext",
     "outDir": "./dist/",
     "rootDir": "./",
     "strict": false,
-    "esModuleInterop": true,
-    "strictNullChecks": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "skipLibCheck": true
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true
   },
   "include": ["src/**/*", "api/**/*"]
 }
