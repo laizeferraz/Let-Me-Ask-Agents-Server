@@ -1,13 +1,10 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: {
-    'api/serverless': 'api/serverless.ts',
-    'src/server': 'src/server.ts',
-  },
+  entry: ['src/**/*.ts', 'api/**/*.ts'],
   outDir: 'dist',
   format: ['esm'],
-  target: 'node18',
+  target: 'node22',
   clean: true,
   splitting: false,
   dts: false,
