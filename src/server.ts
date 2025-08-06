@@ -1,5 +1,7 @@
 import { fastifyCors } from '@fastify/cors';
 import { fastifyMultipart } from '@fastify/multipart';
+// biome-ignore lint/performance/noNamespaceImport: <explanation>
+import * as dotenv from 'dotenv';
 // To test the database connection, you can uncomment the import below
 // import { sql } from './db/connection.js';
 import { fastify } from 'fastify';
@@ -16,21 +18,14 @@ import { getRoomsRoute } from './http/routes/get-rooms.ts';
 import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered.ts';
 import { uploadAudioRoute } from './http/routes/upload-audio.ts';
 
-const app = fastify().withTypeProvider<ZodTypeProvider>();
+dotenv.config();
+// Instantiate Fastify with some config
+const app = fastify({
+  logger: false,
+}).withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
-  origin: (origin, cb) => {
-    const allowedOrigins = [
-      'http://localhost:5173',
-      'https://let-me-ask-agents-web.vercel.app',
-    ];
-
-    if (!origin || allowedOrigins.includes(origin)) {
-      cb(null, true); // Allow the request
-    } else {
-      cb(new Error('Not allowed by CORS'), false); // Reject the request
-    }
-  },
+  origin: ['http://localhost:5173', 'https://let-me-ask-agents-web.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -53,10 +48,10 @@ app.register(updateQuestionAnsweredRoute);
 app.register(uploadAudioRoute);
 
 if (env.NODE_ENV !== 'production') {
-  app.listen({ port: env.PORT, host: '0.0.0.0' }).then(() => {
-    console.log(`Server running on http://localhost:${env.PORT}`);
-  });
+  app.listen({ port: env.PORT, host: '0.0.0.0' });
 }
 
-// Export the app for Vercel serverless function
-export default app;
+export default async (req, res) => {
+  await app.ready();
+  app.server.emit('request', req, res);
+};

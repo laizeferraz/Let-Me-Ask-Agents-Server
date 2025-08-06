@@ -1,5 +1,6 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: the expression is needed for clarity */
 import { z } from 'zod';
+import 'dotenv/config';
 
 const envSchema = z
   .object({
