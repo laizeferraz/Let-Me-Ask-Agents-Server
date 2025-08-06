@@ -53,9 +53,8 @@ app.register(updateQuestionAnsweredRoute);
 app.register(uploadAudioRoute);
 
 if (env.NODE_ENV !== 'production') {
-  app.listen({
-    port: env.PORT,
-    host: '0.0.0.0',
+  app.listen({ port: env.PORT, host: '0.0.0.0' }).then(() => {
+    console.log(`Server running on http://localhost:${env.PORT}`);
   });
 }
 
