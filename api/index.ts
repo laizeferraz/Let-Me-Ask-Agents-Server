@@ -1,9 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-// biome-ignore lint/performance/noNamespaceImport: <explanation>
-import * as dotenv from 'dotenv';
-import app from '../src/server.js';
-
-dotenv.config();
+import app from '../src/server.ts';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   await app.ready();

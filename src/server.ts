@@ -1,5 +1,7 @@
 import { fastifyCors } from '@fastify/cors';
 import { fastifyMultipart } from '@fastify/multipart';
+// biome-ignore lint/performance/noNamespaceImport: <explanation>
+import * as dotenv from 'dotenv';
 // To test the database connection, you can uncomment the import below
 // import { sql } from './db/connection.js';
 import { fastify } from 'fastify';
@@ -15,6 +17,8 @@ import { getRoomQuestionsRoute } from './http/routes/get-room-questions.ts';
 import { getRoomsRoute } from './http/routes/get-rooms.ts';
 import { updateQuestionAnsweredRoute } from './http/routes/update-question-answered.ts';
 import { uploadAudioRoute } from './http/routes/upload-audio.ts';
+
+dotenv.config();
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
