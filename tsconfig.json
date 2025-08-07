@@ -5,7 +5,7 @@
     "module": "nodenext",
     "target": "ES2021",
     "moduleResolution": "NodeNext",
-    "outDir": "./dist/",
+    "outDir": "./api/",
     "rootDir": "./",
     "strict": false,
     "noEmit": true,
@@ -15,5 +15,5 @@
     "skipLibCheck": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "api/*.ts"]
 }
