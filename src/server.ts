@@ -20,7 +20,9 @@ import { uploadAudioRoute } from './http/routes/upload-audio.ts';
 
 dotenv.config();
 
-const app = fastify().withTypeProvider<ZodTypeProvider>();
+const app = fastify({
+  logger: true,
+}).withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
   origin: [
