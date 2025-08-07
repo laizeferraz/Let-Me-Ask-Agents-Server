@@ -19,10 +19,7 @@ import { updateQuestionAnsweredRoute } from './http/routes/update-question-answe
 import { uploadAudioRoute } from './http/routes/upload-audio.ts';
 
 dotenv.config();
-// Instantiate Fastify with some config
-const app = fastify({
-  logger: false,
-}).withTypeProvider<ZodTypeProvider>();
+const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
   origin: ['http://localhost:5173', 'https://let-me-ask-agents-web.vercel.app'],
@@ -50,8 +47,4 @@ app.register(uploadAudioRoute);
 if (env.NODE_ENV !== 'production') {
   app.listen({ port: env.PORT, host: '0.0.0.0' });
 }
-
-export default async (req, res) => {
-  await app.ready();
-  app.server.emit('request', req, res);
-};
+export default app;
