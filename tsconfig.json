@@ -15,5 +15,5 @@
     "skipLibCheck": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["src/**/*", "api/**/*"]
+  "include": ["src/**/*"]
 }
