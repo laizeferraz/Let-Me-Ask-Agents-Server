@@ -1,14 +1,11 @@
-import Fastify from 'fastify';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+// biome-ignore lint/performance/noNamespaceImport: <explanation>
+import * as dotenv from 'dotenv';
+import app from '../src/server.js';
 
-const app = Fastify({
-  logger: true,
-});
+dotenv.config();
 
-app.get('/', async (request, reply) => {
-  return await reply.status(200).send();
-});
-
-export default async function handler(req, reply) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   await app.ready();
-  app.server.emit('request', req, reply);
+  app.server.emit('request', req, res);
 }
